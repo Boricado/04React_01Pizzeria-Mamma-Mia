@@ -3,3 +3,4 @@ export function formatearPrecio(valor) {
   if (isNaN(numero)) return valor;  // si no se puede convertir, devuelve tal cual
   return numero.toLocaleString('es-CL');
 }
+
