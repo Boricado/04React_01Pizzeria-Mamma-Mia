@@ -6,6 +6,8 @@ import Footer from './assets/components/Footer'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 import '@fortawesome/fontawesome-free/css/all.min.css'
+import RegisterPage from './assets/components/RegisterPage'
+import LoginPage from './assets/components/LoginPage'
 
 
 function App() {
@@ -14,7 +16,11 @@ function App() {
   return (
     <>
       <Navbar/>
-      <Home/>
+      {/* <Home /> */}
+      <RegisterPage/>
+      <br />
+      <hr />
+      <LoginPage/>
       <Footer/>
     </>
   )
