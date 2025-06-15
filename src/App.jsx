@@ -6,9 +6,9 @@ import Footer from './assets/components/Footer'
 import 'bootstrap/dist/css/bootstrap.min.css'
 import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 import '@fortawesome/fontawesome-free/css/all.min.css'
-import RegisterPage from './assets/components/RegisterPage'
-import LoginPage from './assets/components/LoginPage'
-
+// import RegisterPage from './assets/components/RegisterPage'
+// import LoginPage from './assets/components/LoginPage'
+import Cart from './assets/components/Cart'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -16,11 +16,10 @@ function App() {
   return (
     <>
       <Navbar/>
-      {/* <Home /> */}
-      <RegisterPage/>
-      <br />
-      <hr />
-      <LoginPage/>
+      <Home />
+      {/* <RegisterPage/>*/}
+      {/* <LoginPage/>*/}
+      <Cart />
       <Footer/>
     </>
   )
