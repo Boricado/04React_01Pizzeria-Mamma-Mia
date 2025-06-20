@@ -8,7 +8,8 @@ import 'bootstrap/dist/js/bootstrap.bundle.min.js'
 import '@fortawesome/fontawesome-free/css/all.min.css'
 // import RegisterPage from './assets/components/RegisterPage'
 // import LoginPage from './assets/components/LoginPage'
-import Cart from './assets/components/Cart'
+// import Cart from './assets/components/Cart'
+import Pizza from "./assets/components/Pizza";
 
 function App() {
   const [count, setCount] = useState(0)
@@ -19,7 +20,8 @@ function App() {
       <Home />
       {/* <RegisterPage/>*/}
       {/* <LoginPage/>*/}
-      <Cart />
+      {/* <Cart />*/}
+      <Pizza />
       <Footer/>
     </>
   )
