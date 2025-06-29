@@ -1,8 +1,9 @@
 import React from 'react'
 import { formatearPrecio } from '../utils/formato' // ajustar precio en CLP
+import { Link } from 'react-router-dom';
 
-const Navbar = () => {
-  const total = 25000;
+
+const Navbar = ({total}) => {
   const token = false;
 
   return (
@@ -15,13 +16,13 @@ const Navbar = () => {
         <div className="collapse navbar-collapse" id="navbarNav">
           <ul className="navbar-nav w-100">
             <li className="nav-item me-2 mb-2">
-              <button className="btn btn-dark border border-white" type="button"><i className="fa-solid fa-pizza-slice"></i> Home</button>
+              <Link to="/" className="btn btn-dark border border-white" type="button"><i className="fa-solid fa-pizza-slice"></i> Home</Link>
             </li>
           
           {token ? (   // condición ? valorSiVerdadero : valorSiFalso
             <>
               <li className="nav-item me-2 mb-2">
-                <button className="btn btn-dark border border-white" type="button"><i className="fa-solid fa-user-lock"></i> Profile</button>
+                <Link to="/ProfilePage" className="btn btn-dark border border-white" type="button"><i className="fa-solid fa-user-lock"></i> Profile</Link>
               </li>
               <li className="nav-item me-2 mb-2">
                 <button className="btn btn-dark border border-white" type="button"><i className="fa-solid fa-lock"></i> Logout</button>
@@ -31,20 +32,20 @@ const Navbar = () => {
 
             <>
               <li className="nav-item me-2 mb-2">
-                <button className="btn btn-dark border border-white" type="button"><i className="fa-solid fa-lock-open"></i> Login</button>
+                <Link to="/LoginPage" className="btn btn-dark border border-white" type="button"><i className="fa-solid fa-lock-open"></i> Login</Link>
               </li>
               <li className="nav-item me-2 mb-2">
-                <button className="btn btn-dark border border-white" type="button"><i className="fa-solid fa-user-lock"></i> Register</button>
+                <Link to="/RegisterPage" className="btn btn-dark border border-white" type="button"><i className="fa-solid fa-user-lock"></i> Register</Link>
               </li>
             </>
           )
           }
             <li className="nav-item ms-auto">
-            <button className="btn btn-dark border border-primary text-primary" type="button">
+            <Link to="/Cart" className="btn btn-dark border border-primary text-primary" type="button">
               <i className="fa-solid fa-cart-shopping"></i> Total: ${formatearPrecio(total)}
-            </button>
+            </Link>
             </li>
-          </ul>
+          </ul>  
         </div>
       </div>
     </nav>

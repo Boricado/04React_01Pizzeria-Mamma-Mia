@@ -4,7 +4,7 @@ import { resolve } from 'path'
 
 export default defineConfig({
   plugins: [react()],
-  base: '/04React_01Pizzeria-Mamma-Mia/',
+  base: '/',
   build: {
     rollupOptions: {
       input: {
