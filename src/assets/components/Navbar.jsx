@@ -1,9 +1,11 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { formatearPrecio } from '../utils/formato' // ajustar precio en CLP
 import { Link } from 'react-router-dom';
+import { CartContext } from '../context/CartContext';
 
 
-const Navbar = ({total}) => {
+const Navbar = () => {
+  const { total } = useContext(CartContext) //obtener total de CartContext
   const token = false;
 
   return (

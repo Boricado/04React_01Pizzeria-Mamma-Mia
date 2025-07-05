@@ -1,21 +1,12 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
 import Header from '../components/Header'
 import CardPizza from '../components/CardPizza'
 //import pizzas from '../utils/pizzas'
+import { PizzaContext } from '../context/PizzaContext';
 
 
 const Home = () => {
-  const [users, setUsers] = useState([]);
-  
-  const url = "http://localhost:5000/api/pizzas";
-  const getData = async () => {
-    const response = await fetch(url);
-    const data = await response.json();
-    setUsers(data);
-  };
-  useEffect(() => {
-  getData();
-  }, [])
+  const { pizzas } = useContext(PizzaContext) //usar pizza del contexto
 
   return (
     <>
@@ -25,15 +16,9 @@ const Home = () => {
     
     <main className="container">
       <section className="row">
-          {users.map((pizza) => (
+          {pizzas.map((pizza) => (
             <article key={pizza.id} className="col-12 col-sm-10 col-md-6 col-lg-4 col-xl-4 my-4 d-flex justify-content-center">
-              <CardPizza
-                nombre={pizza.name}
-                ingredientes={pizza.ingredients}
-                precio={pizza.price}
-                imagen={pizza.img}
-                descripcion={pizza.desc}
-              />
+            <CardPizza pizza={pizza} />
             </article>
           ))}
         
