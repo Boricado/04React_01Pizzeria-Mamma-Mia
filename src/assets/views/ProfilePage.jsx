@@ -1,9 +1,13 @@
 import React from 'react'
 import profilePics from '../img/Profile.jpg' 
 import { Link } from 'react-router-dom'
-
+import { UserContext } from '../context/UserContext'
+import { useContext } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 const ProfilePage = () => {
+    const { user, logout } = useContext(UserContext)
+    const navigate = useNavigate()
 return (
 <div className="container mt-5 d-flex justify-content-center">
     <div className="card p-3">
@@ -13,10 +17,10 @@ return (
             </div>
             
             <div className="ml-3 w-100 ms-3">
-                <h4 className="mb-0 mt-0">Pedro Pascal</h4>
+                <h4 className="mb-0 mt-0">{user.displayName} </h4>
                 <span>Mejor cliente</span>
                 <hr />
-                <h6>hola_Pedro@pizzas.cl</h6>
+                <h6>{user.email}</h6>
                 <hr />
                 <div className="d-flex justify-content-center m-3">
                     <Link to="/Cart">
@@ -24,7 +28,10 @@ return (
                         Mi carrito <i className="fa-solid fa-cart-shopping"></i>
                         </button>
                     </Link>
-                    <button className="btn btn-dark mb-3" type="button">Cerrar sesión  <i class="fa-solid fa-right-from-bracket"></i></button>
+                    <button className="btn btn-dark mb-3" type="button" onClick={() => {
+                        logout()      // cambia token a false
+                        navigate('/') // redirige automáticamente al home
+                        }}>Cerrar sesión  <i class="fa-solid fa-right-from-bracket"></i></button>
                 </div>
             </div>    
         </div>

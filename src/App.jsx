@@ -10,14 +10,18 @@ import RegisterPage from './assets/views/RegisterPage'
 import LoginPage from './assets/views/LoginPage'
 import Cart from './assets/views/Cart'
 import Pizza from "./assets/views/Pizza"
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Navigate } from 'react-router-dom'
 import NotFound from './assets/views/NotFound'
 //import pizzaCart from './assets/utils/pizzaCart'
 import ProfilePage from './assets/views/ProfilePage'
 import { PizzaProvider } from './assets/context/PizzaContext' 
 import { CartProvider } from './assets/context/CartContext'
+import { UserContext } from './assets/context/UserContext'
+import { useContext } from 'react';
 
 function App() {
+
+  const { user } = useContext(UserContext);
 
   return (
     <>
@@ -26,9 +30,9 @@ function App() {
         <Navbar />
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/RegisterPage' element={<RegisterPage/>} />
-          <Route path='/LoginPage' element={<LoginPage/>} />
-          <Route path='/ProfilePage' element={<ProfilePage/>} />
+          <Route path='/RegisterPage' element={!user ? <RegisterPage /> : <Navigate to="/" />} />
+          <Route path='/LoginPage' element={!user ? <LoginPage /> : <Navigate to="/" />} />
+          <Route path='/ProfilePage' element={user ? <ProfilePage/> : <Navigate to="/LoginPage"/>} />
           <Route path='/Cart' element={<Cart />} /> 
           <Route path="/pizza/:id" element={<Pizza />} />
           <Route path='*' element={<NotFound />} /> 
