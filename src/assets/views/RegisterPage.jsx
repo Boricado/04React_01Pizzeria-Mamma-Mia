@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react'
+import { UserContext } from '../context/UserContext'
+import { useNavigate } from 'react-router-dom'
 
 const RegisterPage = () => {
     const [nombre, setNombre] = useState("")
@@ -7,9 +9,11 @@ const RegisterPage = () => {
     const [confirmPassword, setConfirmPassword] = useState("")
     const [error, setError] = useState("")
     const [success, setSuccess] = useState(false);
+    const { register } = useContext(UserContext);
+    const navigate = useNavigate();
 
     // Prevenimos el comportamiento por defecto
-    const validarInput = (e) => {
+    const validarInput = async (e) => {
         e.preventDefault()
     // Validación input
          if (!nombre.trim() || !email.trim() || !password.trim() || !confirmPassword.trim()) {
@@ -31,8 +35,14 @@ const RegisterPage = () => {
         }
 
         // Todo está bien
-        setError("");
+        try {
+        await register({ email, password }); // solo se envian estos dos campos al backend
         setSuccess(true);
+        navigate("/profile");
+        } catch (err) {
+        setError("Error al registrarse. Intenta con otro correo.");
+        setSuccess(false);
+        }
 
         // Limpiar campos
         setNombre('')

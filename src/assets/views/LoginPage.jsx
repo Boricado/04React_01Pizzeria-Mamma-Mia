@@ -1,13 +1,17 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react'
+import { UserContext } from '../context/UserContext'
+import { useNavigate } from 'react-router-dom'
 
 const LoginPage = () => {
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
     const [error, setError] = useState("")
-    const [success, setSuccess] = useState(false);
+    const [success, setSuccess] = useState(false)
+    const { login } = useContext(UserContext);
+    const navigate = useNavigate();
 
     // Prevenimos el comportamiento por defecto
-    const validarInput = (e) => {
+    const validarInput = async (e) => {
         e.preventDefault()
     // Validación input
          if (!email.trim() || !password.trim()) {
@@ -17,14 +21,21 @@ const LoginPage = () => {
         }
 
         if (password.length < 6) {
-        setError("La contraseña debe tener al menos 6 caracteres");
+        setError("La contraseña debe tener al menos 6 caracteres")
         setSuccess(false);
-        return;
+        return
         }
 
         // Todo está bien
         setError("");
-        setSuccess(true);
+        
+        // Login
+        try {
+        await login({ email, password });
+        navigate("/profile");
+        } catch (err) {
+        setError("Error al iniciar sesión. Revisa tus credenciales.");
+        }  
 
         // Limpiar campos
         setEmail('')
@@ -44,8 +55,11 @@ const LoginPage = () => {
                 <label>Email:
                     {error && !email.trim() ? <span className="text-danger"> *</span> : null}
                 </label>
-                <input className="form-control form-control-sm w-75 mx-auto" type="email" value={email} onChange={(e) =>
-                    setEmail(e.target.value)} />
+                <input className="form-control form-control-sm w-75 mx-auto" 
+                        type="email" 
+                        value={email} 
+                        onChange={(e) => setEmail(e.target.value)} 
+                />
                 <br />
                 <label>Password:
                     {error && !email.trim() ? <span className="text-danger"> *</span> : null}
